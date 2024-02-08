@@ -9,7 +9,7 @@
  * this project can be found here:  https://pi4j.com/
  * **********************************************************************
  * %%
- * Copyright (C) 2012 - 2021 Pi4J
+ * Copyright (C) 2012 - 2024 Pi4J
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -110,7 +110,7 @@ public class GpioTest {
 
         switch(PlatformManager.getPlatform()){
             case RASPBERRYPI:{
-                Pin pins[] = RaspiPin.allPins();
+                Pin pins[] = RaspiBcmPin.allPins();
                 Arrays.sort(pins);
                 gpioOutputsTest(pins);
                 break;
@@ -124,46 +124,51 @@ public class GpioTest {
         final Scanner in = new Scanner(System.in);
         final GpioController gpio = GpioFactory.getInstance();
         for(Pin pin : pins){
-            // provision pin
-            System.out.println("... provisioning pin: " + pin.toString());
-            GpioPinDigitalOutput outputPin = gpio.provisionDigitalOutputPin(pin, PinState.LOW);
+        	try {
+	            // provision pin
+	            System.out.println("... provisioning pin: " + pin.toString());
+	            GpioPinDigitalOutput outputPin = gpio.provisionDigitalOutputPin(pin, PinState.LOW);
 
-            System.out.println(">>> pin: " + pin.toString() + " should be in the LOW state.");
+	            System.out.println(">>> pin: " + pin.toString() + " should be in the LOW state.");
 
-            // wait for user input
-            System.out.println("... press ENTER to continue ...");
-            in.next();
+	            // wait for user input
+	            System.out.println("... press ENTER to continue ...");
+	            in.next();
 
-            // set pin to HIGH state
-            outputPin.high();
-            System.out.println(">>> pin: " + pin.toString() + " should be in the HIGH state.");
+	            // set pin to HIGH state
+	            outputPin.high();
+	            System.out.println(">>> pin: " + pin.toString() + " should be in the HIGH state.");
 
-            // wait for user input
-            System.out.println("... press ENTER to continue ...");
-            in.next();
+	            // wait for user input
+	            System.out.println("... press ENTER to continue ...");
+	            in.next();
 
-            // set pin to LOW state
-            outputPin.toggle();
-            System.out.println(">>> pin: " + pin.toString() + " should be in the LOW state.");
+	            // set pin to LOW state
+	            outputPin.toggle();
+	            System.out.println(">>> pin: " + pin.toString() + " should be in the LOW state.");
 
-            // wait for user input
-            System.out.println("... press ENTER to continue ...");
-            in.next();
+	            // wait for user input
+	            System.out.println("... press ENTER to continue ...");
+	            in.next();
+	/*
+	            // set pin to blink
+	            outputPin.blink(1000);
+	            System.out.println(">>> pin: " + pin.toString() + " should be blinking 1 time per second.");
 
-            // set pin to blink
-            outputPin.blink(1000);
-            System.out.println(">>> pin: " + pin.toString() + " should be blinking 1 time per second.");
+	            // wait for user input
+	            System.out.println("... press ENTER to continue ...");
+	            in.next();
 
-            // wait for user input
-            System.out.println("... press ENTER to continue ...");
-            in.next();
-
-            // stop blinking
-            outputPin.blink(0);
-
-            // un-provision pin
-            System.out.println("... un-provisioning pin: " + pin.toString());
-            gpio.unprovisionPin(outputPin);
+	            // stop blinking
+	            outputPin.blink(0);
+	*/
+	            // un-provision pin
+	            System.out.println("... un-provisioning pin: " + pin.toString());
+	            gpio.unprovisionPin(outputPin);
+        	}
+        	catch (Exception e) {
+        		System.out.println(e.getMessage());
+        	}
         }
 
         //close scanner stream

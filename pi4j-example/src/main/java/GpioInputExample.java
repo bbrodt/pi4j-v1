@@ -9,7 +9,7 @@
  * this project can be found here:  https://pi4j.com/
  * **********************************************************************
  * %%
- * Copyright (C) 2012 - 2021 Pi4J
+ * Copyright (C) 2012 - 2024 Pi4J
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,13 +74,13 @@ public class GpioInputExample {
         // has been provided, then lookup the pin by address
         Pin pin = CommandArgumentParser.getPin(
                 RaspiPin.class,    // pin provider class to obtain pin instance from
-                RaspiPin.GPIO_01,  // default pin if no pin argument found
+                RaspiPin.GPIO_24,  // default pin if no pin argument found
                 args);             // argument array to search in
 
         // by default we will use gpio pin PULL-UP; however, if an argument
         // has been provided, then use the specified pull resistance
         PinPullResistance pull = CommandArgumentParser.getPinPullResistance(
-                PinPullResistance.PULL_UP,  // default pin pull resistance if no pull argument found
+                PinPullResistance.PULL_DOWN,  // default pin pull resistance if no pull argument found
                 args);                      // argument array to search in
 
         // provision gpio pin as an input pin

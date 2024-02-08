@@ -12,7 +12,7 @@
  * this project can be found here:  https://pi4j.com/
  * **********************************************************************
  * %%
- * Copyright (C) 2012 - 2021 Pi4J
+ * Copyright (C) 2012 - 2024 Pi4J
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ public class DebounceGpioExample {
         // Please note that if you make a call to 'getState()', 'isHigh()' or 'isLow()' the actual current state
         // will be returned, the debounce feature only suppresses event notifications, is does not attempt to
         // mask the actual pin state.
-        myButton.setDebounce(1000);
+        myButton.setDebounce(500);
 
         // create and register gpio pin listener
         myButton.addListener(new GpioPinListenerDigital() {

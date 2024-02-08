@@ -9,7 +9,7 @@
  * this project can be found here:  https://pi4j.com/
  * **********************************************************************
  * %%
- * Copyright (C) 2012 - 2021 Pi4J
+ * Copyright (C) 2012 - 2024 Pi4J
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,8 @@
  * limitations under the License.
  * #L%
  */
+
+import java.util.Scanner;
 
 import com.pi4j.io.gpio.*;
 import com.pi4j.platform.PlatformAlreadyAssignedException;
@@ -54,6 +56,7 @@ public class SoftPwmExample {
         // create Pi4J console wrapper/helper
         // (This is a utility class to abstract some of the boilerplate code)
         final Console console = new Console();
+        final Scanner in = new Scanner(System.in);
 
         // print program title/header
         console.title("<-- The Pi4J Project -->", "SoftPWM Example (Software-driven PWM Emulation)");
@@ -68,7 +71,7 @@ public class SoftPwmExample {
         // has been provided, then lookup the pin by address
         Pin pin = CommandArgumentParser.getPin(
                 RaspiPin.class,    // pin provider class to obtain pin instance from
-                RaspiPin.GPIO_01,  // default pin if no pin argument found
+                RaspiPin.GPIO_06,  // default pin if no pin argument found
                 args);             // argument array to search in
 
         // we will provision the pin as a software emulated PWM output
@@ -94,14 +97,14 @@ public class SoftPwmExample {
         console.println("Software emulated PWM rate is: " + pwm.getPwm());
 
         console.println("Press ENTER to set the PWM to a rate of 50");
-        System.console().readLine();
+        in.next();
 
         // set the PWM rate to 50 (1/2 DUTY CYCLE)
         pwm.setPwm(50);
         console.println("Software emulated PWM rate is: " + pwm.getPwm());
 
         console.println("Press ENTER to set the PWM to a rate to 0 (stop PWM)");
-        System.console().readLine();
+        in.next();
 
         // set the PWM rate to 0 (FULLY OFF)
         pwm.setPwm(0);
