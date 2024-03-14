@@ -46,7 +46,7 @@ public class RaspiGpioProvider extends WiringPiGpioProviderBase implements GpioP
     public RaspiGpioProvider() {
         // set wiringPi interface for internal use
         // we will use the (default) WiringPi pin number scheme with the wiringPi library
-        this(RaspiPinNumberingScheme.DEFAULT_PIN_NUMBERING);
+        this(RaspiPinNumberingScheme.BROADCOM_PIN_NUMBERING);
     }
 
     /**
